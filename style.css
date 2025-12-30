@@ -222,4 +222,94 @@ body {
     .game-header h1 {
         font-size: 2em;
     }
+
+    .controls-box {
+        display: none;
+    }
+
+    /* 移动端控制器样式 */
+    .mobile-controls {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-top: 30px;
+        padding: 20px;
+        background: linear-gradient(135deg, rgba(245, 247, 250, 0.9) 0%, rgba(195, 207, 226, 0.9) 100%);
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .mobile-btn-row {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        align-items: center;
+    }
+
+    .mobile-btn-row-top {
+        justify-content: center;
+    }
+
+    .mobile-btn-row-middle {
+        gap: 20px;
+    }
+
+    .mobile-btn {
+        width: 65px;
+        height: 65px;
+        border: none;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        transition: all 0.2s ease;
+        -webkit-tap-highlight-color: transparent;
+        user-select: none;
+        padding: 0;
+    }
+
+    .mobile-btn svg {
+        width: 30px;
+        height: 30px;
+    }
+
+    .mobile-btn:active {
+        transform: scale(0.92);
+        box-shadow: 0 3px 10px rgba(102, 126, 234, 0.4);
+    }
+
+    .mobile-btn-left, .mobile-btn-right {
+        width: 70px;
+        height: 70px;
+    }
+
+    .mobile-btn-down {
+        width: 60px;
+        height: 60px;
+    }
+
+    .mobile-btn-rotate, .mobile-btn-pause {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        box-shadow: 0 6px 20px rgba(240, 147, 251, 0.4);
+    }
+
+    .mobile-btn-rotate:active, .mobile-btn-pause:active {
+        box-shadow: 0 3px 10px rgba(240, 147, 251, 0.4);
+    }
+}
+
+/* 桌面端隐藏移动控制器 */
+@media (min-width: 769px) {
+    .mobile-controls {
+        display: none;
+    }
+}
+
+/* 防止移动端双击缩放 */
+button {
+    touch-action: manipulation;
 }

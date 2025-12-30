@@ -410,6 +410,39 @@ document.addEventListener('keydown', (e) => {
 document.getElementById('startBtn').addEventListener('click', startGame);
 document.getElementById('restartBtn').addEventListener('click', startGame);
 
+// 移动端控制按钮事件
+document.getElementById('btnLeft').addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    movePiece(-1);
+});
+
+document.getElementById('btnRight').addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    movePiece(1);
+});
+
+document.getElementById('btnDown').addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    moveDown();
+});
+
+document.getElementById('btnRotate').addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    rotatePiece();
+});
+
+document.getElementById('btnPause').addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    togglePause();
+});
+
+// 同时也支持鼠标点击（用于桌面测试）
+document.getElementById('btnLeft').addEventListener('click', () => movePiece(-1));
+document.getElementById('btnRight').addEventListener('click', () => movePiece(1));
+document.getElementById('btnDown').addEventListener('click', () => moveDown());
+document.getElementById('btnRotate').addEventListener('click', () => rotatePiece());
+document.getElementById('btnPause').addEventListener('click', () => togglePause());
+
 // 初始化
 initBoard();
 drawBoard();
