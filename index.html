@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>俄罗斯方块 - Tetris</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="game-header">
+            <h1>俄罗斯方块</h1>
+            <button id="startBtn" class="btn start-btn">开始游戏</button>
+        </div>
+
+        <div class="game-wrapper">
+            <div class="left-panel">
+                <div class="info-box">
+                    <h3>分数</h3>
+                    <p id="score" class="value">0</p>
+                </div>
+                <div class="info-box">
+                    <h3>等级</h3>
+                    <p id="level" class="value">1</p>
+                </div>
+                <div class="info-box">
+                    <h3>消除行数</h3>
+                    <p id="lines" class="value">0</p>
+                </div>
+            </div>
+
+            <div class="game-board-container">
+                <canvas id="gameBoard" width="300" height="600"></canvas>
+                <div id="gameOver" class="game-over hidden">
+                    <div class="game-over-content">
+                        <h2>游戏结束!</h2>
+                        <p>最终分数: <span id="finalScore">0</span></p>
+                        <button id="restartBtn" class="btn restart-btn">重新开始</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-panel">
+                <div class="next-piece-box">
+                    <h3>下一个</h3>
+                    <canvas id="nextPiece" width="120" height="120"></canvas>
+                </div>
+
+                <div class="controls-box">
+                    <h3>操作说明</h3>
+                    <div class="control-item">
+                        <span class="key">←</span>
+                        <span>左移</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">→</span>
+                        <span>右移</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">↓</span>
+                        <span>加速下落</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">↑</span>
+                        <span>旋转</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">空格</span>
+                        <span>暂停</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
