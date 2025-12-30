@@ -1,13 +1,58 @@
 // 游戏配置
 const COLS = 10;
 const ROWS = 20;
-const BLOCK_SIZE = 30;
+let BLOCK_SIZE = 30;
 
 // 获取画布和上下文
 const canvas = document.getElementById('gameBoard');
 const ctx = canvas.getContext('2d');
 const nextCanvas = document.getElementById('nextPiece');
 const nextCtx = nextCanvas.getContext('2d');
+
+// 响应式画布大小调整
+function adjustCanvasSize() {
+    if (window.innerWidth <= 768) {
+        // 计算可用高度
+        const headerHeight = document.querySelector('.game-header').offsetHeight;
+        const statsHeight = document.querySelector('.left-panel').offsetHeight;
+        const controlsHeight = document.querySelector('.mobile-controls').offsetHeight;
+        const padding = 40; // 额外的边距
+
+        const availableHeight = window.innerHeight - headerHeight - statsHeight - controlsHeight - padding;
+        const availableWidth = window.innerWidth - 40; // 左右边距
+
+        // 计算适合的方块大小
+        const maxBlockWidth = Math.floor(availableWidth / COLS);
+        const maxBlockHeight = Math.floor(availableHeight / ROWS);
+        BLOCK_SIZE = Math.min(maxBlockWidth, maxBlockHeight, 25); // 最大25px
+
+        // 设置画布大小
+        canvas.width = COLS * BLOCK_SIZE;
+        canvas.height = ROWS * BLOCK_SIZE;
+        canvas.style.width = canvas.width + 'px';
+        canvas.style.height = canvas.height + 'px';
+    } else {
+        // 桌面端保持原有大小
+        BLOCK_SIZE = 30;
+        canvas.width = 300;
+        canvas.height = 600;
+        canvas.style.width = '';
+        canvas.style.height = '';
+    }
+
+    // 重绘游戏
+    if (board.length > 0) {
+        drawBoard();
+    }
+}
+
+// 窗口大小改变时重新调整
+window.addEventListener('resize', () => {
+    adjustCanvasSize();
+});
+
+// 初始化时调整画布大小
+window.addEventListener('load', adjustCanvasSize);
 
 // 游戏状态
 let board = [];
@@ -360,6 +405,7 @@ function gameOver() {
 
 // 开始游戏
 function startGame() {
+    adjustCanvasSize();
     initBoard();
     score = 0;
     level = 1;
