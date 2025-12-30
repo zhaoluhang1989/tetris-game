@@ -11,6 +11,11 @@ const nextCtx = nextCanvas.getContext('2d');
 
 // 响应式画布大小调整
 function adjustCanvasSize() {
+    const dpr = window.devicePixelRatio || 1;
+
+    // 重置变换矩阵
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+
     if (window.innerWidth <= 768) {
         // 计算可用高度
         const headerHeight = document.querySelector('.game-header').offsetHeight;
@@ -21,23 +26,35 @@ function adjustCanvasSize() {
         const availableHeight = window.innerHeight - headerHeight - statsHeight - controlsHeight - padding;
         const availableWidth = window.innerWidth - 40; // 左右边距
 
-        // 计算适合的方块大小
+        // 计算适合的方块大小（使用CSS像素）
         const maxBlockWidth = Math.floor(availableWidth / COLS);
         const maxBlockHeight = Math.floor(availableHeight / ROWS);
         BLOCK_SIZE = Math.min(maxBlockWidth, maxBlockHeight, 25); // 最大25px
 
-        // 设置画布大小
-        canvas.width = COLS * BLOCK_SIZE;
-        canvas.height = ROWS * BLOCK_SIZE;
-        canvas.style.width = canvas.width + 'px';
-        canvas.style.height = canvas.height + 'px';
+        // 设置画布显示尺寸（CSS像素）
+        const displayWidth = COLS * BLOCK_SIZE;
+        const displayHeight = ROWS * BLOCK_SIZE;
+
+        // 设置画布实际像素尺寸（考虑设备像素比）
+        canvas.width = displayWidth * dpr;
+        canvas.height = displayHeight * dpr;
+        canvas.style.width = displayWidth + 'px';
+        canvas.style.height = displayHeight + 'px';
+
+        // 缩放绘图上下文以匹配设备像素比
+        ctx.scale(dpr, dpr);
     } else {
         // 桌面端保持原有大小
         BLOCK_SIZE = 30;
-        canvas.width = 300;
-        canvas.height = 600;
-        canvas.style.width = '';
-        canvas.style.height = '';
+        const displayWidth = 300;
+        const displayHeight = 600;
+
+        canvas.width = displayWidth * dpr;
+        canvas.height = displayHeight * dpr;
+        canvas.style.width = displayWidth + 'px';
+        canvas.style.height = displayHeight + 'px';
+
+        ctx.scale(dpr, dpr);
     }
 
     // 重绘游戏
